@@ -2,16 +2,23 @@
 
 ## Certificate Requirements:
 
-Certificate Table in OPCUA Spec Part 4, Table 109. 
-In OpenSecureChannel is specified "The Certificates used in the OpenSecureChannel service shall be the Application Instance Certificates."
+For OPCUA Version 1.04, check in OPCUA Specification Part 4, Section 6.1.2 and Table 106 and Part 6, Section 6.2 and Table 36.
+Every OPCUA Application requires an Application Instance Certificate with the following requirements:
 
-* certificate must be PKIX compliant (at least for X.509)
-* certificate must be valid at thre correct time
-* the trust chain must check out (can be traced back to trusted certificates)
-* the application uri must be correct (referred to as field 6 in milo, not sure why)
-* subject alt name DNS and/or IP address must match the used one (referred to as field 2 and 7 in milo)
-* the keyUsage must include: digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
-
+* The certificate must be a valid X.509v3 certificate
+* Certificates used by OPC UA applications shall also conform to RFC 3280 which defines a profile for X.509 v3 Certificates when they are used as part of an Internet based application.
+* An Application Instance Certificate is a ByteString containing the DER encoded form (see X690) of an X.509 v3 Certificate. 
+* If the server does not trust self-signed certificates, the issuer of the certificate must be known and must be traced back to trusted certificates of the server
+* The certificate must contain the network name or address of the computer where the application runs
+* The certificate must contain the name of the organisation that administers or owns the application
+* The certificate must contain the name of the application
+* The certificate must contain the URI of the application instance
+* The Certificate signature shall comply with the CertificateSignatureAlgorithm, MinAsymmetricKeyLength and MaxAsymmetricKeyLength requirements for the used SecurityPolicy
+* The certificate must be valid at the time of the use, unless the server surpresses errors about this
+* For servers, the hostname in the URL used to connect to it, must be one of the hostnames specified in the certificate
+* The certificate may have a revocation list. Revoked certificates may not be used.
+* The keyUsage shall include digitalSignature, nonRepudiation, keyEncipherment and dataEncipherment. Other key uses are allowed.
+* The alternate names (subjectAltName) for the application Instance shall include a URI which is equal to the applicationUri. The URI shall be a valid URL (see RFC 1738) or a valid URN (see RFC 2141).
 
 
 ## How to generate a compliant certificate:
