@@ -10,7 +10,7 @@ services:
     ports:
       - "4840:4840"
     volumes:
-       - /home/melanie/Desktop/opcua/opcua-secure-example/server/credentials:/app/credentials
+       - ./server/credentials:/app/credentials
        
 volumes:
     credentials:
