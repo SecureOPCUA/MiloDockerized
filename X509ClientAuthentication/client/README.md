@@ -23,24 +23,13 @@ Every OPCUA Application requires an Application Instance Certificate with the fo
 
 ## How to generate a compliant certificate:
 
-
-
-1. Personalize the openssl config file secrets/openssl.cnf 
-    e.g.,
-    -  `countryName_default	= DE`
-    - `stateOrProvinceName_default	= Nordrhein-Westfalen`
-    - `organizationName_default = Fraunhofer`
-    - `organizationalUnitName_default	= Software Engineering`
-    - `commonName_default  = John Doe`
-    - `emailAdress_default     = john2@doe.com`
-
-2. Generate openssl command using the config:
+1. Generate the certificate using the openssl command and the configuration file:
     `openssl req -x509 -sha256 -newkey rsa:2048 -keyout privateKey.key -out certificate.crt -extensions v3_self_signed -config=openssl.cnf`
     
-3.  Convert into one file
+3.  Convert the key and the certificate into one file
     `openssl pkcs12 -export -name opcua -in certificate.crt -inkey privateKey.key > opcua.p12`
 
-4. Import certificate into keystore
+4. Import the certificate into the keystore
     `keytool -importkeystore -srckeystore opcua.p12 -destkeystore opcua.keystore -srcstoretype pkcs12 -alias opcua`
 
 ## How to build and start the opcua client
