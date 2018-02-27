@@ -5,14 +5,14 @@ services:
     depends_on:
       - "server"
     volumes:
-       - /home/melanie/Desktop/opcua/opcua-secure-example/client/secrets:/app/secrets
+       - ./client/secrets:/app/secrets
        
   server:
     image: opcua-server
     ports:
       - "4840:4840"
     volumes:
-       - /home/melanie/Desktop/opcua/opcua-secure-example/server/certificates:/app/certificates
+       - ./server/certificates:/app/certificates
        
 volumes:
     certificates:
