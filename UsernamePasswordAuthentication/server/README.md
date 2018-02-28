@@ -1,11 +1,4 @@
 # How to generate a Secure OPCUA Server using Eclipse Milo
-
-## Copy trusted Client Certificate into Folder of trusted Certificates
-
-1. Chose the right file. You do not want certificates including the private key 
-   here (like .p12), you want the public certficate (like .crt).
-
-2. Copy it into `certificates/security/trusted`
     
 ## How to build and start the OPCUA Server
 
