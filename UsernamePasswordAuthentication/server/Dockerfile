@@ -19,7 +19,7 @@ VOLUME /app/credentials
 # Tell the server it is responsible for traffic adressed to "server", docker networks substitute the correct IP
 ENV OPCUA_SERVER_IP server
 
-# Here the certificates for the can be found, both the server's own and rejected or trusted client credentials
+# Directory in which the user database is locate
 ENV SECURE_FOLDER /app/credentials
 
 EXPOSE 4840
