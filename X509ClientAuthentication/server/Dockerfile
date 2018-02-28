@@ -19,7 +19,7 @@ VOLUME /app/certificates
 # Tell the server it is responsible for traffic adressed to "server", docker networks substitute the correct IP
 ENV OPCUA_SERVER_IP "server"
 
-# Here the certificates for the can be found, both the server's own and rejected or trusted client certificates
+# The certificates can be found here, both the server's own and rejected or trusted client certificates
 ENV OPCUA_CERT_DIR "/app/certificates"
 
 EXPOSE 4840
