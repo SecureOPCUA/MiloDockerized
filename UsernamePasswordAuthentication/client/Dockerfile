@@ -15,7 +15,7 @@ RUN cp /app/milo/milo-examples/standalone-examples/target/milo-opcua-client-jar-
 ADD wait-for-it.sh /app
 
 # Define endpoint of server - the name refers to the other container in the docker compose
-ENV ENDPOINT_URL opc.tcp://server:4840
+ENV ENDPOINT_URL opc.tcp://server:4840/example
 
 # Put passwords here
 ENV USERNAME User
