@@ -19,7 +19,7 @@ VOLUME /app/credentials
 # Tell the server it is responsible for traffic adressed to "server", docker networks substitute the correct IP
 ENV OPCUA_SERVER_IP server
 
-# Directory in which the user database is locate
+# Directory in which the user database is located
 ENV SECURE_FOLDER /app/credentials
 
 EXPOSE 4840
