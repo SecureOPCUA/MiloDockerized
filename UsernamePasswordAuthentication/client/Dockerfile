@@ -8,7 +8,7 @@ WORKDIR /app
 RUN git clone https://github.com/mbruns42/milo.git && cd milo && git checkout origin/user-database-docker
 
 # Use maven to build a client jar
-RUN cd milo && mvn package -P userdatabase -Dmaven.test.failure.ignore=true && cd /app
+RUN cd milo && mvn package -P userdatabase -DskipTests && cd /app
 
 # Copy the compiled jar into the container at /app as well as a script that makes the client wait for the server to accept TCP connections
 RUN cp /app/milo/milo-examples/standalone-examples/target/milo-opcua-client-jar-with-dependencies.jar /app
