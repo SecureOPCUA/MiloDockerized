@@ -1,12 +1,14 @@
-version: "3"
+version: "2"
 services:
   client:
     image: opcua-client
+    build: ./client
     depends_on:
       - "server"
        
   server:
     image: opcua-server
+    build: ./server
     ports:
       - "4840:4840"
     volumes:
