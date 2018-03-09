@@ -7,8 +7,8 @@ WORKDIR /app
 # Clone the milo fork, build the jar using maven and copy the jar into the container at /app, then remove the unnecessary code to reduce image size
 RUN git clone https://github.com/mbruns42/milo.git \
     && cd milo \
-    && mvn package -P standalone-client -DskipTests \
-    && cp /app/milo/milo-examples/client-examples/target/milo-opcua-client-jar-with-dependencies.jar /app \
+    && mvn package -P certificate-example -DskipTests \
+    && cp /app/milo/milo-examples/standalone-examples/target/milo-opcua-client-jar-with-dependencies.jar /app \
     && rm -r /app/milo
 
 # Copy the compiled jar into the container at /app as well as a script that makes the client wait for the server to accept TCP connections
@@ -21,7 +21,7 @@ VOLUME /app/secrets
 ENV ENDPOINT_URL opc.tcp://server:4840
 
 # Put passwords here
-ENV KEYSTOREPSWED opcuakeystore
+ENV KEYSTOREPSWD opcuakeystore
 ENV KEYPSWD opcuakey
 
 # Run example client

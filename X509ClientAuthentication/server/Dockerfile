@@ -7,8 +7,8 @@ WORKDIR /app
 # Clone the milo fork, build the jar using maven and copy the jar into the container at /app, then remove the unnecessary code to reduce image size
 RUN git clone https://github.com/mbruns42/milo.git \
     && cd milo \
-    && mvn package -P standalone-server -DskipTests \
-    && cp /app/milo/milo-examples/server-examples/target/milo-opcua-server-jar-with-dependencies.jar /app \
+    && mvn package -P certificate-example -DskipTests \
+    && cp /app/milo/milo-examples/standalone-examples/target/milo-opcua-server-jar-with-dependencies.jar /app \
     && rm -r /app/milo
 
 # Add seperate directory for secrets that should not be copied into image for reuseability
