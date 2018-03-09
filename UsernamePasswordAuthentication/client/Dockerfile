@@ -4,14 +4,15 @@ FROM maven
 # Set the working directory to /app
 WORKDIR /app
 
-# Clone the milo fork, which includes standalone examples and checkout the correct branch
-RUN git clone https://github.com/mbruns42/milo.git && cd milo && git checkout origin/user-database-docker
-
-# Use maven to build a client jar
-RUN cd milo && mvn package -P userdatabase -DskipTests && cd /app
-
-# Copy the compiled jar into the container at /app as well as a script that makes the client wait for the server to accept TCP connections
-RUN cp /app/milo/milo-examples/standalone-examples/target/milo-opcua-client-jar-with-dependencies.jar /app
+# Clone the milo fork and checkout the correct branch, build the jar using maven and copy the jar into the container at /app, then remove the unnecessary code to reduce image size
+RUN git clone https://github.com/mbruns42/milo.git \
+    && cd milo \
+    && git checkout origin/user-database-docker \
+    && mvn clean package -P userdatabase -DskipTests \
+    && cp /app/milo/milo-examples/standalone-examples/target/milo-opcua-client-jar-with-dependencies.jar /app \
+    && rm -r /app/milo
+    
+# Add a script that makes the client wait for the server to accept TCP connections
 ADD wait-for-it.sh /app
 
 # Define endpoint of server - the name refers to the other container in the docker compose
