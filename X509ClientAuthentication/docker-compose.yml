@@ -1,14 +1,16 @@
 version: "3"
 services:
   client:
-    image: opcua-client
+    image: opcua-x509-client
+    build: ./client
     depends_on:
       - "server"
     volumes:
        - ./client/secrets:/app/secrets
        
   server:
-    image: opcua-server
+    image: opcua-x509-server
+    build: ./server
     ports:
       - "4840:4840"
     volumes:
