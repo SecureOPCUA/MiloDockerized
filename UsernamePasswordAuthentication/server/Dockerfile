@@ -13,13 +13,13 @@ RUN git clone https://github.com/mbruns42/milo.git \
     && rm -r /app/milo
 
 # Add seperate directory for secrets that should not be copied into image for reuseability
-VOLUME /app/credentials
+VOLUME /app/security
 
 # Tell the server it is responsible for traffic adressed to "server", docker networks substitute the correct IP
 ENV OPCUA_SERVER_IP server
 
-# Directory in which the user database is located
-ENV SECURE_FOLDER /app/credentials
+# Directory in which the security related information such as certificates and user databases is located
+ENV SECURE_FOLDER /app/security
 
 EXPOSE 4840
 

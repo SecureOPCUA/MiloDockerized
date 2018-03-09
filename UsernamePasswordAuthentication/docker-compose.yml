@@ -1,18 +1,18 @@
 version: "2"
 services:
   client:
-    image: opcua-client
+    image: opcua-username-client
     build: ./client
     depends_on:
       - "server"
        
   server:
-    image: opcua-server
+    image: opcua-username-server
     build: ./server
     ports:
       - "4840:4840"
     volumes:
-       - ./server/credentials:/app/credentials
+       - ./server/security:/app/security
        
 volumes:
     credentials:

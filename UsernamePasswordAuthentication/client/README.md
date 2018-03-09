@@ -5,17 +5,17 @@
 1. Make sure docker is installed and running
 
 2. Build the docker image for the opcua client
-    `docker build -t opcua-client .`
+    `docker build -t opcua-username-client .`
     
    Important: If you build the client again, docker may use intermediate images and not check out the most recent version of the source code. 
-   In this case use `docker build --no-cache -t opcua-client .`
+   In this case use `docker build --no-cache -t opcua-username-client .`
 
 3. Run the opcua client
-    `docker run -v $(pwd)/secrets:/app/secrets opcua-client`
+    `docker run -v $(pwd)/secrets:/app/secrets opcua-username-client`
     
 4. For debugging purposes it may be helpful to run it with a shell. 
     This allows you to check whether enviroment variables are set correctly, other containers can be reached or explore the filesystem.
-    `docker run -it -v $(pwd)/secrets:/app/secrets opcua-client /bin/bash`
+    `docker run -it -v $(pwd)/secrets:/app/secrets opcua-username-client /bin/bash`
     
 ## Without docker container and more elegant variant
 
