@@ -4,14 +4,14 @@ FROM maven
 # Set the working directory to /app
 WORKDIR /app
 
-# Clone the milo fork, which includes standalone examples
-RUN git clone https://github.com/mbruns42/milo.git
-
-# Go into directory that was checked out and use maven to build a client jar
-RUN cd milo && mvn package -P standalone-client -Dmaven.test.failure.ignore=true && cd /app
+# Clone the milo fork, build the jar using maven and copy the jar into the container at /app, then remove the unnecessary code to reduce image size
+RUN git clone https://github.com/mbruns42/milo.git \
+    && cd milo \
+    && mvn package -P standalone-client -DskipTests \
+    && cp /app/milo/milo-examples/client-examples/target/milo-opcua-client-jar-with-dependencies.jar /app \
+    && rm -r /app/milo
 
 # Copy the compiled jar into the container at /app as well as a script that makes the client wait for the server to accept TCP connections
-RUN cp milo/milo-examples/client-examples/target/milo-opcua-client-jar-with-dependencies.jar /app
 ADD wait-for-it.sh /app
 
 # Add seperate directory for secrets that should not be copied into image for reuseability
