@@ -8,5 +8,5 @@
 The server does not stop automatically so stop it with "Ctrl + C".
 You will know the test succeeded when you read the log message "Succeeded in making a connection on a secure channel.".
 4. Client and server can now be used separately. 
-Images can be reused, as the credentials for the client and the user database for the server are
+The server image can be reused, as the user database for the server is
 both located outside the images and can be changed without rebuilding the image.

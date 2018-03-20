@@ -18,10 +18,9 @@ ADD wait-for-it.sh /app
 # Define endpoint of server - the name refers to the other container in the docker compose
 ENV ENDPOINT_URL opc.tcp://server:4840/example
 
-# Get client credentials from credentials file
-ADD credentials /app
-RUN eval $(cat credentials) \
-    && rm credentials
+# Put passwords here
+ENV USERNAME User
+ENV PASSWORD userpassword
 
 # Run example client
 CMD ["./wait-for-it.sh", "server:4840", "--","java", "-jar", "milo-opcua-client-jar-with-dependencies.jar"]
