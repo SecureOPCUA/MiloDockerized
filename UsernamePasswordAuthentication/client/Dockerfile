@@ -20,8 +20,7 @@ ENV ENDPOINT_URL opc.tcp://server:4840/example
 
 # Get client credentials from credentials file
 ADD credentials /app
-RUN echo $(ls) \\
-    && eval $(cat credentials) \\
+RUN eval $(cat credentials) \
     && rm credentials
 
 # Run example client
